@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="km">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ចូលប្រព័ន្ធ</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Khmer OS Battambang", Arial, sans-serif;
+        background: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .login-box {
+        width: 500px; /* bigger width */
+        padding: 40px 50px; /* more padding */
+        transform: scale(1.3);
+        transform-origin: center;
+        min-height: 450px; /* optional height */
+      }
+      .login-title {
+        color: #0d6efd;
+        font-weight: bold;
+      }
+      .error {
+        background: #ffe5e5;
+        color: #d9534f;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-size: 14px;
+      }
+
+      a.btn.btn-primary,
+      button.btn.btn-primary {
+        font-size: 1rem;
+        padding: 10px 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        border-radius: 6px;
+        width: 100%;
+      }
+
+      a.btn.btn-primary:hover,
+      button.btn.btn-primary:hover {
+        background-color: #0056b3; /* darker blue */
+        color: #fff;
+      }
+
+      /* Fix button inside input group for eye toggle */
+      .btn-toggle-pass {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        color: #6c757d;
+        padding: 0 8px;
+      }
+
+      .btn-toggle-pass:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      @media (max-width: 768px) {
+        .login-box {
+          transform: scale(1);
+          width: 90%;
+          padding: 30px 20px;
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box card shadow p-4">
+      <h2 class="login-title text-center mb-2">ចូលប្រព័ន្ធ Networking</h2>
+      <p class="text-center text-muted mb-3">សូមបញ្ចូលព័ត៌មានរបស់គណនីអ្នកខាងក្រោមនេះ</p>
+
+      <!-- error message -->
+      <div class="error text-center">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        ស្រឡាញ់គេអ្នកម្នាក់ឯងចឹងតាសបានចេះតែភ្លេចគណនី🤣
+      </div>
+
+      <!-- login form -->
+      <form id="loginForm" novalidate>
+        <div class="mb-3 input-group">
+          <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="ឈ្មោះប្រើប្រាស់អីក៏បានដែរឲតែសម"
+            id="username"
+            required
+          />
+          <div class="invalid-feedback">សូមបញ្ចូលឈ្មោះប្រើប្រាស់</div>
+        </div>
+
+        <div class="mb-3 input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="​សង្ស័យតែភ្លេចលេខសម្ងាត់ហើយ"
+            id="password"
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-toggle-pass"
+            id="togglePassword"
+            aria-label="Toggle password visibility"
+            tabindex="-1"
+          >
+            <i class="bi bi-eye-fill" id="eyeIcon"></i>
+          </button>
+          <div class="invalid-feedback">សូមបញ្ចូលលេខសម្ងាត់</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-box-arrow-in-right"></i> ចូលបានហាមចេញ
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        អត់ទាន់មានគណនីផងកញ្ញា​🥲​មក
+        <a href="#" class="text-decoration-none">បង្កើតគណនី</a>ជាមួយខ្ញុំសិនមក​​
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        const form = document.getElementById("loginForm");
+        const togglePasswordBtn = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eyeIcon");
+
+        togglePasswordBtn.addEventListener("click", function () {
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("bi-eye-fill");
+            eyeIcon.classList.add("bi-eye-slash-fill");
+          } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("bi-eye-slash-fill");
+            eyeIcon.classList.add("bi-eye-fill");
+          }
+        });
+
+        form.addEventListener(
+          "submit",
+          function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (!form.checkValidity()) {
+              form.classList.add("was-validated");
+              return;
+            }
+
+            const user = document.getElementById("username").value.trim();
+            const pass = passwordInput.value.trim();
+
+            if (user === "SmosSne" && pass === "168") {
+              alert("អបអរសាទរអ្នកចូលប្រព័ន្ធបានជោគជ័យហើយ! ​Party 🎉");
+              window.location.href = "dashborad.html";
+            } else {
+              alert("ការបញ្ចូលឈ្មោះអ្នកប្រើ ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវទេ!​ ដេកគិតឡើងវិញមក 😴");
+            }
+          },
+          false
+        );
+      })();
+    </script>
+  </body>
+</html>

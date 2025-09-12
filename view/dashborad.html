@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <title>Networking Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-height: 250px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .btn-sm {
+      transition: all 0.2s ease;
+    }
+
+    .btn-sm:hover {
+      transform: scale(1.05);
+    }
+
+    .tab-content {
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 576px) {
+      h5 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><i class="bi bi-hdd-network-fill me-2"></i>Networking Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h3 class="mb-3">ស្វាគមន៍មកកាន់ Dashboard Networking 🚀</h3>
+
+    <!-- Bootstrap Tabs -->
+    <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="view-tab" data-bs-toggle="tab" data-bs-target="#view" type="button" role="tab">Dashboard View</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="live-tab" data-bs-toggle="tab" data-bs-target="#live" type="button" role="tab">Live Data</button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="dashboardTabContent">
+
+      <!-- Dashboard View Tab -->
+      <div class="tab-pane fade show active" id="view" role="tabpanel">
+        <div class="row g-3">
+
+          <!-- Router Card -->
+          <div class="col-md-4">
+            <div class="card shadow-sm p-3 text-center" data-card="router">
+              <div class="icon-circle bg-primary text-white mx-auto">
+                <i class="bi bi-router-fill fs-3" title="Router Status"></i>
+              </div>
+              <h5 class="mt-2">Router Status <span class="badge bg-primary">Live</span></h5>
+              <p>Monitor and manage your routers.</p>
+              <button class="btn btn-outline-primary btn-sm view-btn"><i class="bi bi-eye"></i> View</button>
+
+              <!-- Hidden extra info -->
+              <div class="extra-info mt-3 d-none">
+                <p>Uptime: <strong>12:34:56</strong></p>
+                <p>Firmware: <strong>v1.2.3</strong></p>
+                <p>Status: <strong>Online</strong></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clients Card -->
+          <div class="col-md-4">
+            <div class="card shadow-sm p-3 text-center" data-card="clients">
+              <div class="icon-circle bg-success text-white mx-auto">
+                <i class="bi bi-pc-display fs-3" title="Connected Clients"></i>
+              </div>
+              <h5 class="mt-2">Clients <span class="badge bg-success">12 Online</span></h5>
+              <p>Check all connected devices.</p>
+              <button class="btn btn-outline-success btn-sm view-btn"><i class="bi bi-eye"></i> View</button>
+
+              <!-- Hidden extra info -->
+              <div class="extra-info mt-3 d-none">
+                <p>Devices: <strong>12 connected</strong></p>
+                <p>Blocked: <strong>2 devices</strong></p>
+                <p>New Today: <strong>3 devices</strong></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Network Usage Card -->
+          <div class="col-md-4">
+            <div class="card shadow-sm p-3 text-center" data-card="usage">
+              <div class="icon-circle bg-danger text-white mx-auto">
+                <i class="bi bi-activity fs-3" title="Network Usage"></i>
+              </div>
+              <h5 class="mt-2">Network Usage <span class="badge bg-danger">75%</span></h5>
+              <p>Track data and performance.</p>
+              <button class="btn btn-outline-danger btn-sm view-btn"><i class="bi bi-eye"></i> View</button>
+
+              <!-- Hidden extra info -->
+              <div class="extra-info mt-3 d-none">
+                <p>Download: <strong>54 Mbps</strong></p>
+                <p>Upload: <strong>12 Mbps</strong></p>
+                <p>Ping: <strong>18 ms</strong></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Live Data Tab -->
+      <div class="tab-pane fade" id="live" role="tabpanel">
+        <div class="row text-center g-3">
+          <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+              <h5>Router Uptime</h5>
+              <div id="router-uptime" class="display-6 text-primary">--:--:--</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+              <h5>Clients Online</h5>
+              <div id="clients-online" class="display-6 text-success">--</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+              <h5>Bandwidth Usage</h5>
+              <div id="bandwidth" class="display-6 text-danger">-- Mbps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Simulated Live Data Script -->
+  <script>
+    function updateLiveData() {
+      const uptime = new Date().toLocaleTimeString();
+      const clients = Math.floor(Math.random() * 30) + 1;
+      const bandwidth = (Math.random() * 100).toFixed(2);
+
+      document.getElementById("router-uptime").textContent = uptime;
+      document.getElementById("clients-online").textContent = clients + " devices";
+      document.getElementById("bandwidth").textContent = bandwidth + " Mbps";
+    }
+
+    setInterval(updateLiveData, 2000); // Update every 2 seconds
+    updateLiveData(); // Initial load
+  </script>
+
+  <!-- View Button Toggle Script -->
+  <script>
+    document.querySelectorAll('.view-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.card');
+        const extraInfo = card.querySelector('.extra-info');
+
+        if (extraInfo.classList.contains('d-none')) {
+          extraInfo.classList.remove('d-none');
+          button.innerHTML = '<i class="bi bi-eye-slash"></i> Hide';
+        } else {
+          extraInfo.classList.add('d-none');
+          button.innerHTML = '<i class="bi bi-eye"></i> View';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
