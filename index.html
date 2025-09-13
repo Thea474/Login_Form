@@ -127,7 +127,7 @@
           <div class="invalid-feedback">សូមបញ្ចូលលេខសម្ងាត់</div>
         </div>
 
-        <button type="submit" class="btn btn-primary" disabled id="loginBtn">
+        <button type="submit" class="btn btn-primary" id="loginBtn">
           <i class="bi bi-box-arrow-in-right"></i> ចូលបានហាមចេញ
         </button>
       </form>
@@ -162,6 +162,8 @@
         usernameInput.addEventListener("input", checkInputs);
         passwordInput.addEventListener("input", checkInputs);
 
+        checkInputs(); // initial check to set button state
+
         togglePasswordBtn.addEventListener("click", function () {
           if (passwordInput.type === "password") {
             passwordInput.type = "text";
@@ -179,6 +181,29 @@
           function (event) {
             event.preventDefault();
             event.stopPropagation();
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Check if all fields are filled
+            if (!username || !password) {
+              alert("សូមបញ្ចូលព័ត៌មានទាំងអស់!");
+              return;
+            }
+
+            // Validate username: only letters and spaces
+            const usernameRegex = /^[a-zA-Z\s]+$/;
+            if (!usernameRegex.test(username)) {
+              alert("ឈ្មោះប្រើប្រាស់ត្រូវតែជាអក្សរតែប៉ុណ្ណោះ!");
+              return;
+            }
+
+            // Validate password: must contain letters and numbers
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)/;
+            if (!passwordRegex.test(password)) {
+              alert("លេខសម្ងាត់ត្រូវតែមានអក្សរ និងលេខ!");
+              return;
+            }
 
             alert("អបអរសាទរអ្នកចូលប្រព័ន្ធបានជោគជ័យហើយ! ​Party 🎉");
             window.location.replace("view/dashboard.html");
